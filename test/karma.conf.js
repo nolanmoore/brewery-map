@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
       'bower_components/ui-leaflet/dist/ui-leaflet.js',
       'bower_components/leaflet-providers/leaflet-providers.js',
+      'bower_components/leaflet.locatecontrol/src/L.Control.Locate.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

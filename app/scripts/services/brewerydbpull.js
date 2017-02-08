@@ -12,14 +12,14 @@ angular.module('breweryMapApp')
     var baseUrl = 'http://api.brewerydb.com/v2/';
     var apiKey = breweryDB_key;
 
-    var getBreweriesNear = function (location) {
+    var getBreweriesNear = function (location, radius) {
       var url = baseUrl + 'search/geo/point';
       return $http.get(url, {
         params: {
           key: apiKey,
           lat: location.lat,
           lng: location.lng,
-          radius: 3,
+          radius: radius,
           unit: 'mi'
         }
       });

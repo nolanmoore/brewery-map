@@ -37,6 +37,7 @@ angular.module('breweryMapApp')
       });
       leaf.mymap.addLayer(layerOsm);
       L.control.layers(baseLayers, overlayLayers).addTo(leaf.mymap);
+      L.control.locate().addTo(leaf.mymap);
     };
 
     leaf.init();

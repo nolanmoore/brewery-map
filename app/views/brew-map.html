@@ -1,0 +1,56 @@
+<h1>brewery locator map</h1>
+<p class="lead">Use the inputs below the map to choose a location and view details.<br />Map will auto-center on your current location if provided.</p>
+<hr />
+
+<leaflet id="brewmap" markers="brewMap.markers" lf-center="brewMap.center" width="100%" height="480px"></leaflet>
+<br />
+<p>{{eventDetected}}</p>
+
+<form class="form-inline" ng-if="$rootScope.debug">
+  <div class="form-group">
+    <label for="zip">Zip:</label>
+    <input type="text" id="zip" class="form-control" ng-model="zipcode">
+    <button class="btn btn-primary" ng-click="brewMap.getLatLng()">Get Location</button>
+  </div>
+</form>
+<br />
+
+<form class="form-inline">
+  <div class="form-group">
+    <label for="lat">Lat:</label>
+    <input type="text" id="lat" class="form-control" ng-model="brewMap.center.lat">
+    <label for="lng">Lng:</label>
+    <input type="text" id="lng" class="form-control" ng-model="brewMap.center.lng">
+    <button class="btn btn-primary" ng-click="brewMap.getBreweries()">Get Breweries</button>
+  </div>
+</form>
+<br />
+
+<!-- <form class="form-inline">
+  <div class="form-group">
+    <label for="locationselect">Select location:</label>
+    <select id="locationselect" class="form-control" ng-model="brewMap.currentAddress" ng-change="brewMap.recenter()">
+      <option ng-repeat="location in brewMap.addressBook" value="{{location.index}}">{{location.company}}</option>
+    </select>
+  </div>
+</form>
+<br /> -->
+
+<!-- <div class="well well-sm" ng-show="brewMap.currentAddress >= 0">
+  <p>Company: {{brewMap.addressBook[brewMap.currentAddress].company}}</p>
+  <p>Address: {{brewMap.addressBook[brewMap.currentAddress].address}}</p>
+  <p>Phone: {{brewMap.addressBook[brewMap.currentAddress].phone}}</p>
+  <p>Email: {{brewMap.addressBook[brewMap.currentAddress].email}}</p>
+</div> -->
+
+<p ng-repeat="brewery in brewMap.breweries | orderBy:'distance'">
+  {{brewery.brewery.name}}<br />
+  {{brewery.streetAddress}}<br />
+  <span ng-if="brewery.locality && brewery.locality != ''">{{brewery.locality}}<br /></span>
+  <span ng-if="brewery.region && brewery.region != ''">{{brewery.region}}<br /></span>
+  <span ng-if="brewery.postalCode && brewery.postalCode != ''">{{brewery.postalCode}}<br /></span>
+  <a href="{{brewery.brewery.website}}">{{brewery.brewery.website}}</a>
+  <hr />
+</p>
+
+<pre ng-if="$rootScope.debug">{{brewMap.breweries | json}}</pre>
